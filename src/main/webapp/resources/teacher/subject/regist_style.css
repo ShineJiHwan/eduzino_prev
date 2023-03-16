@@ -3,6 +3,17 @@ body{
 	min-height: 100vh;
 	 -ms-overflow-style: none;
 }
+a.ud-link-neutral.side-nav--nav-item-link--2qfvl:hover {
+    text-decoration-line: none;
+    color: black;
+    background-color: #f1eeee;
+}
+p{
+	font-size: 16px;
+}
+button{
+	border: none;
+}
 ::-webkit-scrollbar {
   display: none;
 }
@@ -21,7 +32,7 @@ body{
     padding: 9.2rem 2.4rem 3.2rem 0;
     position: relative;
 }
-.ud-heading-md {
+.ud-heading-md ,.zino-subject-movie-select-labal{
     font-family: udemy sans,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
     font-weight: 700;
     line-height: 1.2;
@@ -93,6 +104,10 @@ body{
 .app--content--3vcMt ol, .app--content--3vcMt .ud-form-group {
     max-width: 51rem;
 }
+.ud-form-btn-group{
+	margin-top:1rem;
+	max-width: 58rem;
+}
 .goals-form--subtitle--3R5d- {
     padding-bottom: 2.5rem;
 }
@@ -154,17 +169,6 @@ body{
 	border: none;
 	font-size: 19px;
 }
-
-a.ud-link-neutral.side-nav--nav-item-link--2qfvl:hover {
-    text-decoration-line: none;
-    color: black;
-    background-color: #f1eeee;
-}
-
-p{
-	font-size: 16px;
-}
-
 .btn--input--close--icon {
 	height: 45px;
 	width: 45px;
@@ -200,7 +204,7 @@ p{
     flex-wrap: wrap;
     gap: 1.6rem;
 }
-.zino-subject-form-group, .zino-subject-movie-form-head-body{
+.zino-subject-form-group, .zino-subject-movie-form-head-body,.zino-subject-movie-editor-icon-box{
 	display: inline;
 }
 .course-basics-form--category-fields--1M1_V{
@@ -240,20 +244,81 @@ p{
 	cursor: pointer;	
 }
 .form-group.details-form--question-text-container--2ac22{
-	max-width: 55rem;
+	max-width: 59rem;
 }
 .subject-form-note{
 	color: #6a6f73;
 	padding-top: 0.3rem;
     font-size: 0.775rem;
 }
-.zino-subject-movie-form-group{
+i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
+    font-size: 0.9rem;
+}
+.zino-subject-section-form-group{
 	background-color: #f7f9fa;
 	border: 1px solid #6a6f73;
 }
 .zino-subject-movie-form-head{
 	padding: 1rem 0.5rem;
 }
+.zino-subject-movie-form-head-input{
+	display: inline;
+	    margin: 0 0.3rem 0 0.5rem;
+}
 .zino-subject-movie-form-head-label{
 	font-weight: 700;
+}
+.zino-subject-movie-form-body{
+    padding: 0 0.8rem 2.2rem 3.7rem;
+}
+.zino-subject-movie-form-body-label{
+	font-weight: 540;
+}
+.zino-subject-movie-editor{
+	background: #fff;
+}
+.zino-subject-movie-title{
+	border: 1px solid #6a6f73;
+	padding: 0.8rem 0.5rem;
+}
+.zino-subject-movie-editor-icon-box button{
+	background: #fff;
+}
+.zino-subject-movie-flex{
+	display: flex;
+}
+.zino-subject-movie-left-component{
+	width: 80%;
+}
+.zino-subject-movie-add-btn-box{
+	height: 1.3rem;
+}
+.zino-subject-movie-add-btn{
+	border: 1px solid;
+    padding: 0.3rem 0.9rem;
+    background: #fff;
+    position: relative;
+    top: 60%;
+    transform: translateY(-50%);
+}
+.zino-subject-movie-add-select-btn{/*강의선택 클릭시 바뀔 클래스명*/
+	border: 1px solid;
+    padding: 0.3rem 0.9rem;
+    background: #fff;
+    position: relative;
+    top: 103%;
+    transform: translateY(-50%);
+    border-bottom: none;
+}
+.zino-subject-movie-select-form-group{
+	padding: 0.4rem;
+}
+.zino-subject-movie-select-labal{
+	border-bottom: 1px solid #d1d7dc;
+	display: inline-block;
+}
+.zino-subject-movie-select-lable-text{
+	padding: 0.4rem 0.2rem;
+	height:2rem;
+	align-items: center;
 }

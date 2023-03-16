@@ -34,10 +34,10 @@
 	       				<span>다음 설명은 강의 미리보기에서 공개되며 강의 성과에 직접적으로 영향을 미칩니다. 이러한 설명은 수강생이 강의가 자신에게 맞는지 여부를 판단할 수 있도록 돕습니다.</span>
 	      			</p>
 	      			<div>
-	      				<div class="zino-subject-movie-form-group">
+	      				<div class="zino-subject-section-form-group">
 	      					<div class="zino-subject-movie-form-head">
 	      						<span class="zino-subject-movie-form-head-label">      						
-		      						세션1 : 
+		      						세션1:
 	      						</span>
 	      						<div class="zino-subject-movie-form-head-input">
 		      						<i class="bi bi-file-earmark"></i>
@@ -45,14 +45,39 @@
 	      						</div>
 	      					</div>
 	      					<div class="zino-subject-movie-form-body">
-	      						<div>
-	      							
-	      						</div>
+		      					<div class="zino-subject-movie-editor">
+	      							<div class="zino-subject-movie-flex zino-subject-movie-title">
+	      								<div class="zino-subject-movie-left-component">
+	      									<span class="zino-subject-movie-form-body-label">강의1:</span>
+			      							<div class="zino-subject-movie-form-head-input">
+					      						<i class="bi bi-file-earmark"></i>
+					      						<span class="zino-subject-movie-form-head-value">제목</span>
+				      						</div>
+				      						<div class="zino-subject-movie-editor-icon-box">
+				      							<button class="zino-subject-movie-edit-icon">
+						      						<i class="bi bi-pencil-fill"></i>
+				      							</button>
+				      							<button class="zino-subject-movie-edit-icon">
+						      						<i class="bi bi-eraser-fill"></i>
+				      							</button>
+				      						</div>
+			      						</div>
+		      							<div class="zino-subject-movie-add-btn-box">
+			      							<button class="zino-subject-movie-add-btn">강의선택</button>
+			      						</div>
+		      						</div>
+		      						<div class="zino-subject-movie-select-form-group">
+		      							<div class="zino-subject-movie-select-labal">
+		      								<span class="zino-subject-movie-select-lable-text">영상목록</span>
+		      							</div>
+		      							영상 선택폼올곳
+		      						</div>
+		      					</div>
 	      					</div>
 	      				</div>
 	      			</div>
            		</div>
-				<div class="ud-form-group">
+				<div class="ud-form-btn-group">
 					<button class="btn btn-primary mb-2 mb-md-0 mr-2 btn--form-grop-save float-right">저장하기</button>
 				</div>
            	</div>
