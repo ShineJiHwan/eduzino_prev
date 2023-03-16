@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- 관리자,회원 -->
+		<typeAlias type="com.edu.zino.domain.Admin" alias="Admin"/>
+		<typeAlias type="com.edu.zino.domain.Member" alias="Member"/>
+		<typeAlias type="com.edu.zino.domain.Teacher" alias="Teacher"/>
+		
+		<!-- 강의 관련 -->
+		<typeAlias type="com.edu.zino.domain.Subject" alias="Subject"/>
+		
+		<!-- 결제관련 -->
+		<typeAlias type="com.edu.zino.domain.Cart" alias="Cart"/>
+		<typeAlias type="com.edu.zino.domain.Wish" alias="Wish"/>
+		<typeAlias type="com.edu.zino.domain.TopCategory" alias="TopCategory"/>
+		<typeAlias type="com.edu.zino.domain.MidCategory" alias="MidCategory"/>
+		<typeAlias type="com.edu.zino.domain.SubCategory" alias="SubCategory"/>
+		
+		<typeAlias type="com.edu.zino.domain.OrderSummary" alias="OrderSummary"/>
+		<typeAlias type="com.edu.zino.domain.OrderDetail" alias="OrderDetail"/>
+		<typeAlias type="com.edu.zino.domain.Payment" alias="Payment"/>
+		
+		<!-- 메세지관련 -->
+		<typeAlias type="com.edu.zino.domain.Message" alias="Message"/>
+		<typeAlias type="com.edu.zino.domain.Chat" alias="Chat"/>
+		
+		<!-- 관리자 게시판 관련 -->
+		<typeAlias type="com.edu.zino.domain.Adminboard" alias="Adminboard"/>
+		<typeAlias type="com.edu.zino.domain.Grade" alias="Grade"/>
+		<typeAlias type="com.edu.zino.domain.Target" alias="Target"/>
+		
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/edu/zino/mybatis/TopCategoryMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/MidCategoryMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/SubCategoryMapper.xml"/>
+		
+		<mapper resource="com/edu/zino/mybatis/AdminMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/TeacherMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/MemberMapper.xml"/>
+		
+		<mapper resource="com/edu/zino/mybatis/SubjectMapper.xml"/>
+
+		<mapper resource="com/edu/zino/mybatis/CartMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/WishMapper.xml"/>
+
+		<mapper resource="com/edu/zino/mybatis/OrderSummaryMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/OrderDetailMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/PaymentMapper.xml"/>
+		
+		<mapper resource="com/edu/zino/mybatis/MessageMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/ChatMapper.xml"/>
+		
+		<mapper resource="com/edu/zino/mybatis/GradeMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/TargetMapper.xml"/>
+	</mappers>
+</configuration>
