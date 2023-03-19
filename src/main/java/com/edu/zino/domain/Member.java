@@ -13,5 +13,4 @@ public class Member {
 	private String member_birth;//생년월일
 	private String member_photo;//프로필사진
 	private Sns_name social_login;//로그인 방식
-	
 }

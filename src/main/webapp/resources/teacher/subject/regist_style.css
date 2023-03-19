@@ -26,6 +26,12 @@ button{
     margin-right: auto;
     margin-left: 50px;
 }
+.table-tr-3{
+	line-height: 30px;
+}
+.zino-subject-pagination button{
+	padding: 7px 16px;
+}
 .side-nav--side-nav--h8FTL {
     max-width: 28.6rem;
     min-width: 17.2rem;
@@ -160,6 +166,8 @@ button{
     border: none;
     font-weight: 550;
     height: 2.5rem;
+    background: #7dca5a;
+    color: #fff;
 }
 .btn--form-grop-save:hover, .btn--form-grop-back, .btn--form-grop-back:hover{
     background-color: #7dca5a;
@@ -301,6 +309,9 @@ i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
     top: 60%;
     transform: translateY(-50%);
 }
+.zino-subject-movie-add-btn:hover, .zino-subject-movie-plus-btn-box button:hover{
+	background: rgba(0,0,0,.04);
+}
 .zino-subject-movie-add-select-btn{/*강의선택 클릭시 바뀔 클래스명*/
 	border: 1px solid;
     padding: 0.3rem 0.9rem;
@@ -311,14 +322,84 @@ i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
     border-bottom: none;
 }
 .zino-subject-movie-select-form-group{
+    border: 1px solid #6a6f73;
+    border-top: 0;
 	padding: 0.4rem;
 }
 .zino-subject-movie-select-labal{
 	border-bottom: 1px solid #d1d7dc;
-	display: inline-block;
+	/*display: inline-block;*/
 }
 .zino-subject-movie-select-lable-text{
 	padding: 0.4rem 0.2rem;
-	height:2rem;
-	align-items: center;
+    display: flex;
+    height: 2.2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.zino-subject-movie-select-list-form-group{
+	padding-top: 1rem;
+}
+.zino-subject-movie-select-search-box{
+	margin: 0 0 1rem auto;
+	display: flex;
+	width: 60%;
+}
+.zino-subject-movie-select-search-box input{
+	padding: 0 1rem;
+	width:100%;
+	border: 1px solid #1c1d1f;
+	border-right: 0;
+	height: 2rem;
+	flex: 1;
+}
+.zino-subject-movie-select-search-box button{
+	width: 2rem;
+    height: 2rem;
+    background: black;
+    border: 1px solid;
+}
+i.bi.bi-search{
+	color: white;
+}
+.zino-subject-movie-select-table-name{
+	width: 50%
+}
+.zino-subject-regist-table{
+	width:100%;
+	text-align: center;
+}
+.zino-subject-movie-select-btn,.zino-subject-movie-delete-btn{
+	color:#fff;
+	background: #7dca5a;
+	border: none;
+}
+.zino-subject-movie-select-btn{
+	margin-right: 10px;
+}
+.zino-subject-regist-table tr{
+	border: 0;
+    border-bottom: 1px solid #d1d7dc;
+}
+.zino-subject-regist-table tr td, .zino-subject-regist-table tr th{
+	    padding: 0.625rem;
+}
+.zino-subject-regist-table tr th{
+	padding-top: 0;
+}
+.zino-subject-movie-plus-btn-box{
+	margin-top: 1rem;
+    background-color: #fff;
+}
+.zino-subject-movie-plus-btn-box{
+	background-color: #f7f9fa;
+}
+.zino-subject-movie-plus-btn-box button{
+	border: 1px solid;
+    padding: 0.3rem 0.9rem;
+    background: #fff;
+
+}
+.zino-subject-movie-plus-btn-box i.bi.bi-plus{
+	font-size: 19px;
 }
