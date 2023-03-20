@@ -212,7 +212,8 @@ button{
     flex-wrap: wrap;
     gap: 1.6rem;
 }
-.zino-subject-form-group, .zino-subject-movie-form-head-body,.zino-subject-movie-editor-icon-box{
+.zino-subject-form-group, .zino-subject-movie-form-head-body,.zino-subject-movie-editor-icon-box,
+.zino-subject-movie-head-icon-box{
 	display: inline;
 }
 .course-basics-form--category-fields--1M1_V{
@@ -275,6 +276,19 @@ i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
 }
 .zino-subject-movie-form-head-label{
 	font-weight: 700;
+}
+.zino-subject-movie-head-icon-box button{
+	background: #f7f9fa;
+}
+
+.zino-subject-movie-edit-icon,.zino-subject-movie-delete-icon{
+	opacity: 0;
+}
+.zino-subject-movie-form-head:hover .zino-subject-movie-edit-icon,.zino-subject-movie-form-head:hover .zino-subject-movie-delete-icon{
+    opacity:1;
+}
+.zino-subject-movie-title:hover .zino-subject-movie-edit-icon,.zino-subject-movie-title:hover .zino-subject-movie-delete-icon{
+    opacity:1;
 }
 .zino-subject-movie-form-body{
     padding: 0 0.8rem 2.2rem 3.7rem;
