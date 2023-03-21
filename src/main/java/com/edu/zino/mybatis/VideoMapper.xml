@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Video">
+
+	<!-- 강의 영상 여러건 등록 (list로 받아 1개등록도 가능) -->
+	<insert id="insert" parameterType="java.util.List">
+		insert into video(video_idx,video_link,video_name,teacher_idx)
+		<foreach collection="list" item="item" separator=",">
+	    (
+	          seq_video.nextval
+	        , #{item.video_link}
+	        , #{item.video_name}
+	        , #{item.teacher.teacher_idx}
+	    )
+	    </foreach>
+	</insert>
+	
+	<!-- 강사가 보유중하면서 access가 1인 영상을 가져오기 -->
+	<select id="selectAllByTeacher" parameterType="int" resultType="Video">
+		select * from video where teacher_idx=#{teacher_idx} and video_access=1
+	</select>
+	
+	<!-- 영상 이름 및 경로 변경 -->
+	<update id="update" parameterType="Video">
+		update video set video_name=#{video_name}, video_link=#{video_link} where video_idx=#{video_idx}
+	</update>
+	
+	<!--강사가 영상 삭제 요청 시 발생하는 쿼리(access를 0으로)-->
+	<update id="removeUpdate" parameterType="int">
+		update video set video_access=0 where video_idx=#{video_idx}
+	</update>
+	
+	<!-- 관리자가 데이터를 삭제 -->
+	<delete id="delete" parameterType="java.util.List">
+		delete video 
+		<where> 
+			<foreach collection="list" item="item" open="" close="" separator="OR"> 
+			(video_idx=#{item.video_idx}) 
+			</foreach> 
+		</where> 
+	</delete>
+	
+</mapper>

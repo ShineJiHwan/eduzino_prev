@@ -11,6 +11,7 @@
 		
 		<!-- 강의 관련 -->
 		<typeAlias type="com.edu.zino.domain.Subject" alias="Subject"/>
+		<typeAlias type="com.edu.zino.domain.Video" alias="Video"/>
 		
 		<!-- 결제관련 -->
 		<typeAlias type="com.edu.zino.domain.Cart" alias="Cart"/>
@@ -44,6 +45,7 @@
 		<mapper resource="com/edu/zino/mybatis/MemberMapper.xml"/>
 		
 		<mapper resource="com/edu/zino/mybatis/SubjectMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/VideoMapper.xml"/>
 
 		<mapper resource="com/edu/zino/mybatis/CartMapper.xml"/>
 		<mapper resource="com/edu/zino/mybatis/WishMapper.xml"/>

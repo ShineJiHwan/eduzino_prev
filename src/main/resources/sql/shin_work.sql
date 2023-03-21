@@ -21,7 +21,6 @@ insert into MID_CATEGORY(mid_category_idx,mid_name,top_category_idx) values(seq_
 insert into MID_CATEGORY(mid_category_idx,mid_name,top_category_idx) values(seq_mid_category.nextval,'자기개발',5);
 insert into MID_CATEGORY(mid_category_idx,mid_name,top_category_idx) values(seq_mid_category.nextval,'예술',5);
 
-<<<<<<< HEAD
 select * from mid_category
 
 insert into SUB_CATEGORY(sub_category_idx,sub_name,mid_category_idx) values(seq_sub_category.nextval,'HTML/CSS',1);
@@ -54,9 +53,47 @@ insert into SUB_CATEGORY(sub_category_idx,sub_name,mid_category_idx) values(seq_
 insert into SUB_CATEGORY(sub_category_idx,sub_name,mid_category_idx) values(seq_sub_category.nextval,'뜨개질',10);
 insert into SUB_CATEGORY(sub_category_idx,sub_name,mid_category_idx) values(seq_sub_category.nextval,'캘리그라피',10);
 
-
-
-
 select * from sub_category
-=======
->>>>>>> 4b5f5943f54a43d599168cedf087a264d33380de
+
+
+create table video(
+	video_idx number primary key
+	, video_link varchar2(30) not null
+	, video_name varchar2(200) not null
+	, video_access number default 1 --공개여부 0비공개, 1공개
+	, teacher_idx number
+);
+
+drop table Movie
+
+create table movie(
+	movie_idx number primary key
+	, movie_name varchar2(100)
+	, section_idx number
+	, video_idx number
+);
+
+create sequence seq_video
+increment by 1
+start with 1
+
+-----------삭제할 가라 데이터------------------
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용3',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용4',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용5',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용6',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용7',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용8',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용9',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용10',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용11',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용12',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용13',1);
+insert into video(video_idx,video_link,video_name,teacher_idx) values(seq_video.nextval,'/807359667','테스트용14',1);
+
+select * from video
+
+-----------삭제할 가라 데이터 end------------------
+
+
+

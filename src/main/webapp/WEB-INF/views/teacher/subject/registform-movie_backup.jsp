@@ -53,7 +53,7 @@
 	      						</div>
 	      					</div>
 	      					<div class="zino-subject-movie-form-body">
-								<video_item :videos="videoList" :pm="page" />		      					
+								<video_item :videos="videoList" />		      					
 		      					<div class="zino-subject-movie-plus-btn-box">
 		      						<button>커리큘럼 추가</button>
 		      					</div>
@@ -111,24 +111,53 @@ const video_row = {
 		template:`
 			<tr class="zino-subject-pagination" :style="{border:0}">
 				<td colspan="2" >
-				{{this.pm.totalRecord}}
 					<div class="btn-group" role="group" aria-label="Basic example">
-		                <button v-if="pm.prevFlag" type="button" class="btn btn-primary"><i class="mdi mdi-arrow-left-drop-circle-outline"></i></button>
-						{{pm.firstPage-1}} , {{pm.totalPage}}
-		                <template v-for="i in parseInt(pm.pageSize)">
-			                <button v-if="(i+pm.firstPage-1)<=pm.totalPage" type="button" class="btn btn-primary">{{i+pm.firstPage-1}}</button>
+		                <button v-if="pageManager.prevFlag" type="button" class="btn btn-primary"><i class="mdi mdi-arrow-left-drop-circle-outline"></i></button>
+						{{pageManager.firstPage-1}} , {{pageManager.totalPage}}
+		                <template v-for="i in parseInt(pageManager.pageSize)">
+			                <button v-if="(i+pageManager.firstPage-1)<=pageManager.totalPage" type="button" class="btn btn-primary">{{i+pageManager.firstPage-1}}</button>
 		                </template>
-		                <button v-if="pm.nextFlag" type="button" class="btn btn-primary"><i class="mdi mdi-arrow-right-drop-circle-outline"></i></button>
+		                <button v-if="pageManager.nextFlag" type="button" class="btn btn-primary"><i class="mdi mdi-arrow-right-drop-circle-outline"></i></button>
 		            </div>
 				</td>
 			</tr>
 		`,props:['pm']
-		  ,methods:{
+		,data(){
+			return{
+				pageManager:this.pm
+			};
+		},methods:{
 			reset:function(){
+				this.$set(this.pageManager,'currentPage',1);
+				this.$set(this.pageManager,'totalPage',Math.ceil(this.pageManager.totalRecord/this.pageManager.pageSize));
+				console.log("totalRecord",this.pageManager.totalRecord);
+				console.log("pageSize",this.pageManager.pageSize);
+				console.log("totalPage",this.pageManager.totalRecord/this.pageManager.pageSize);
+				this.$set(this.pageManager,'firstPage',this.pageManager.currentPage-(this.pageManager.currentPage%this.pageManager.blockSize-1));
+				this.$set(this.pageManager,'lastPage',parseInt(this.pageManager.firstPage)+parseInt(this.pageManager.blockSize));
+				this.$set(this.pageManager,'curPos',(this.pageManager.currentPage-1)*this.pageManager.pageSize);
+				this.$set(this.pageManager,'no',this.pageManager.totalRecord-this.pageManager.curPos);
+				this.$set(this.pageManager,'prevFlag',true);
+				this.$set(this.pageManager,'nextFlag',true);
+				
+				if(this.pageManager.currentPage<11){
+					this.pageManager.prevFlag = false;
+				}
+				if(this.pageManager.lastPage>this.pageManager.totalPage){
+					this.pageManager.nextFlag=false;
+				}
+				console.log("pageManager",this.pageManager);
 			}
 		},created:function(){
+			this.reset();
+			console.log("created pagination pagemanager : ",this.pageManager);
+			this.$set(this.pageManager,'totalPage',Math.ceil(this.pageManager.totalRecord/this.pageManager.pageSize));
+			console.log("created pagination pagemanager2 : ",this.pageManager);
+			console.log("pageManager.totalRecord",this.pageManager.totalRecord);
+			console.log("created pagination pagemanager3 : ",this.pageManager);
 		},updated:function(){
-			console.log("test2", this.pm.totalRecord);
+			this.reset();
+			console.log("updated pagination pagemanager : ",this.pageManager);
 		}
 	}
 //html태그에서는 대소문자를 구문못하기때문에 대문자로 사용할시 인식불가
@@ -175,11 +204,11 @@ const video_item ={
 								</tr>
 							</thead>
 							<tbody>
-								<template v-for="movie in videos.videos">
+								<template v-for="movie in videoList.videos">
 									<video_row :item="movie" />
 								</template>
 								<template>
-									<pagination :pm="pm"/>
+									<pagination :pm="pageManager"/>
 								</template>
 							</tbody>
 						</table>
@@ -187,46 +216,37 @@ const video_item ={
 				</div>
 			</div>
 		</div>
-	`,props:['videos', 'pm']
-	,methods:{
+	`,props:['videos']
+	,data(){
+		return{
+			videoList:this.videos,
+			pageManager:[]
+		};
+	},methods:{
 		init:function(){
-
+			this.$set(this.pageManager,'totalRecord',0);
+			this.$set(this.pageManager,'pageSize',10);
+			this.$set(this.pageManager,'blockSize',10);
 		}
 	},created:function(){
 		this.init();
 	},updated:function(){
-		console.log('updated pageManager',this.pm);
+		if(this.videoList.videos != undefined){
+			this.$set(this.pageManager,'totalRecord',this.videoList.videos.length);
+		}
+		console.log('updated pageManager',this.pageManager);
 	},components:{
 		video_row,
 		pagination
 	}
 }
 
-let pageManager = {
-		state: {
-			page: {
-				totalRecord: 0,
-				blockSize: 10,
-				pageSize: 10,
-				totalPage: 0,
-				firstPage: 0,
-				lastPage: 0,
-				currentPage: 0,
-				no: 0,
-				curPos: 0,
-			}
-		},
-		setPage(length) {
-			console.log("렝스는?", length);
-			this.state.page.totalRecord = length;
-			console.log("현재토탈은?", this.state.page.totalRecord);
-		}
-}
 videoApp= new Vue({
 	el:"#videoApp",
 	data:{
 		videoList:[],//강사가 보유중인 전체 강의들
-		page: pageManager.state.page
+		pageSize:10,//페이지 사이즈
+		blockSize:10//블럭사이즈
 	},
 	components:{
 		video_item
@@ -234,10 +254,8 @@ videoApp= new Vue({
 		setList:function(videoList){
 			this.$set(this.videoList,'videos',videoList);
 			console.log("set성공",this.videoList.videos);
-/* 			pageManager.setPage(this.videoList.videos.length); */
 		}
 	},updated:function(){
-		pageManager.setPage(this.videoList.videos.length);
 		console.log('업데이트  : ',this.videoList);
 	}
 });
