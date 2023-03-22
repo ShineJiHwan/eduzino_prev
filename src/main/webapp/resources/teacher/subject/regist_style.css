@@ -14,6 +14,9 @@ p{
 button{
 	border: none;
 }
+.flex{
+	flex:1
+}
 ::-webkit-scrollbar {
   display: none;
 }
@@ -31,6 +34,9 @@ button{
 }
 .zino-subject-pagination button{
 	padding: 7px 16px;
+}
+.zino-subject-input{
+	font-size: 1rem;
 }
 .side-nav--side-nav--h8FTL {
     max-width: 28.6rem;
@@ -213,7 +219,7 @@ button{
     gap: 1.6rem;
 }
 .zino-subject-form-group, .zino-subject-movie-form-head-body,.zino-subject-movie-editor-icon-box,
-.zino-subject-movie-head-icon-box{
+.zino-subject-movie-head-icon-box, .dp-inline{
 	display: inline;
 }
 .course-basics-form--category-fields--1M1_V{
@@ -280,6 +286,9 @@ i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
 .zino-subject-movie-head-icon-box button{
 	background: #f7f9fa;
 }
+.zino-subject-movie-form-head-input input{
+	height: 30px;
+}
 
 .zino-subject-movie-edit-icon,.zino-subject-movie-delete-icon{
 	opacity: 0;
@@ -310,7 +319,9 @@ i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
 	display: flex;
 }
 .zino-subject-movie-left-component{
+	display:flex;
 	width: 80%;
+	align-items: center;
 }
 .zino-subject-movie-add-btn-box{
 	height: 1.3rem;
@@ -385,7 +396,7 @@ i.bi.bi-search{
 }
 .zino-subject-movie-select-btn,.zino-subject-movie-delete-btn{
 	color:#fff;
-	background: #7dca5a;
+	/*background: #7dca5a;*/
 	border: none;
 }
 .zino-subject-movie-select-btn{

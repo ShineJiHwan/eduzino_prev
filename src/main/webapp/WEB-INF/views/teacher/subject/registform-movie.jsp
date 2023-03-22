@@ -53,10 +53,12 @@
 	      						</div>
 	      					</div>
 	      					<div class="zino-subject-movie-form-body">
-								<video_item :videos="videoList" :pm="page" />		      					
+	      						<template v-for="">
+									<video_item :videos="videoList" :pm="page"/>		      					
+	      						</template>
 		      					<div class="zino-subject-movie-plus-btn-box">
-		      						<button>커리큘럼 추가</button>
-		      					</div>
+			      					<button>커리큘럼 추가</button>
+			      				</div>
 	      					</div>
 	      				</div>
 	      			</div>
@@ -84,13 +86,63 @@
 <script type="text/javascript">
 let videoApp;
 let temp;
+let videoState = {
+		page: {
+			totalRecord: 0,
+			blockSize: 10,
+			pageSize: 10,
+			totalPage: 0,
+			firstPage: 0,
+			lastPage: 0,
+			currentPage: 1,
+			no: 0,
+			curPos: 0,
+			prevFlag:true,
+			nextFlag:true,
+		},
+		list:{
+			videoList:[],
+			showList:[],
+		},
+		flag:{
+			
+		},
+		setTotalRecoard() {
+			this.page.totalRecord = this.list.videoList.length;
+			this.init();
+		},
+		setVideoList(videoList){
+			this.list.videoList = videoList;
+		},
+		setShowList(){
+			this.list.showList = this.list.videoList.slice(this.page.curPos,this.page.curPos+this.page.pageSize);
+		},
+		setCurrentPage(currentPage){
+			this.page.currentPage = currentPage;
+			this.init();
+			this.setShowList();
+		},
+		init(){
+			this.page.totalPage = Math.ceil(this.page.totalRecord/this.page.pageSize);
+			this.page.firstPage = this.page.currentPage-(this.page.currentPage%this.page.blockSize-1);
+			this.page.lastPage = parseInt(this.page.firstPage)+parseInt(this.page.blockSize);
+			this.page.curPos = (this.page.currentPage-1)*this.page.pageSize;
+			this.page.no = this.page.totalRecord-this.page.curPos;
+			if(this.page.currentPage<11){
+				this.page.prevFlag = false;
+			}
+			if(this.page.lastPage>this.page.totalPage){
+				this.page.nextFlag=false;
+			}
+		}
+}
 const video_row = {
 		template:`
 			<tr>
 				<td>{{video.video_name}}</td>
 				<td>
 					<button class="btn btn-primary zino-subject-movie-select-btn" @click="choose(video)">선택</button>
-					<button class="btn btn-primary zino-subject-movie-delete-btn" @click="del(video)">삭제</button>
+					<button class="btn btn-danger zino-subject-movie-delete-btn" @click="del(video)">삭제</button>
 				</td>
 			</tr>
 		`,props:['item']
@@ -111,12 +163,10 @@ const video_row = {
 		template:`
 			<tr class="zino-subject-pagination" :style="{border:0}">
 				<td colspan="2" >
-				{{this.pm.totalRecord}}
 					<div class="btn-group" role="group" aria-label="Basic example">
 		                <button v-if="pm.prevFlag" type="button" class="btn btn-primary"><i class="mdi mdi-arrow-left-drop-circle-outline"></i></button>
-						{{pm.firstPage-1}} , {{pm.totalPage}}
 		                <template v-for="i in parseInt(pm.pageSize)">
-			                <button v-if="(i+pm.firstPage-1)<=pm.totalPage" type="button" class="btn btn-primary">{{i+pm.firstPage-1}}</button>
+			                <button v-if="(i+pm.firstPage-1)<=pm.totalPage" type="button" class="btn btn-primary" @click="currentPageChange(i+pm.firstPage-1)">{{i+pm.firstPage-1}}</button>
 		                </template>
 		                <button v-if="pm.nextFlag" type="button" class="btn btn-primary"><i class="mdi mdi-arrow-right-drop-circle-outline"></i></button>
 		            </div>
@@ -124,138 +174,145 @@ const video_row = {
 			</tr>
 		`,props:['pm']
 		  ,methods:{
-			reset:function(){
+			currentPageChange(currentPage){
+				videoState.setCurrentPage(currentPage);
 			}
-		},created:function(){
 		},updated:function(){
-			console.log("test2", this.pm.totalRecord);
+			console.log("pagination updated");
 		}
 	}
 //html태그에서는 대소문자를 구문못하기때문에 대문자로 사용할시 인식불가
 const video_item ={
 	template:`
 		<div class="zino-subject-movie-editor">
-			<div class="zino-subject-movie-flex zino-subject-movie-title">
-				<div class="zino-subject-movie-left-component">
-					<span class="zino-subject-movie-form-body-label">강의1:</span>
-					<div class="zino-subject-movie-form-head-input">
-						<i class="bi bi-file-earmark"></i>
-						<span class="zino-subject-movie-form-head-value">제목</span>
-					</div>
-					<div class="zino-subject-movie-editor-icon-box">
-						<button class="zino-subject-movie-edit-icon">
-  						<i class="bi bi-pencil-fill"></i>
-						</button>
-						<button class="zino-subject-movie-delete-icon">
-  						<i class="bi bi-eraser-fill"></i>
-						</button>
-					</div>
-				</div>
-				<div class="zino-subject-movie-add-btn-box">
-					<button class="zino-subject-movie-add-btn">강의선택</button>
-				</div>
-			</div>
-			<div class="zino-subject-movie-select-form-group">
-				<div class="zino-subject-movie-select-labal">
-					<span class="zino-subject-movie-select-lable-text">영상목록</span>
-				</div>
-				<div class="zino-subject-movie-select-list-form-group">
-					<div class="zino-subject-movie-select-search-box">
-						<input type="text"  placeholder="이름별로 파일 검색">
-						<button>
-							<i class="bi bi-search"></i>
-						</button>
-					</div>			      							
-					<div class="zino-subject-movie-select-table">
-						<table class="zino-subject-regist-table">
-							<thead>
-								<tr>
-									<th class="zino-subject-movie-select-table-name">파일이름</th>
-									<th class="zino-subject-movie-select-table-btn-box"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<template v-for="movie in videos.videos">
-									<video_row :item="movie" />
-								</template>
-								<template>
-									<pagination :pm="pm"/>
-								</template>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+		    <div v-if="!flag.titleFlag" class="zino-subject-movie-flex zino-subject-movie-title">
+		        <div class="zino-subject-movie-left-component">
+		            <span class="zino-subject-movie-form-body-label">강의1:</span>
+		            <div class="zino-subject-movie-form-head-input">
+		                <i class="bi bi-file-earmark"></i>
+		                <span class="zino-subject-movie-form-head-value">{{title}}</span>
+		            </div>
+		            <div class="zino-subject-movie-editor-icon-box">
+		                <button class="zino-subject-movie-edit-icon" @click="movieTitleEditEvent()">
+		                    <i class="bi bi-pencil-fill"></i>
+		                </button>
+		                <button class="zino-subject-movie-delete-icon">
+		                    <i class="bi bi-eraser-fill"></i>
+		                </button>
+		            </div>
+		        </div>
+		        <div class="zino-subject-movie-add-btn-box">
+		            <button v-if="!flag.videoShowFlag" class="zino-subject-movie-add-btn" @click="videoFlag">강의선택</button>
+		            <button v-else class="zino-subject-movie-add-select-btn" @click="videoFlag">강의선택&nbsp<i class="bi bi-x-lg"></i></button>
+		        </div>
+		    </div>
+		    <div v-else class="zino-subject-movie-flex zino-subject-movie-title">
+		        <div class="zino-subject-movie-left-component">
+		            <span class="zino-subject-movie-form-body-label">강의1:</span>
+		            <div class="flex zino-subject-movie-form-head-input">
+		                <input class="form-control dp-inline zino-subject-input" :value="title" @input="nameInputEvent($event)"/>
+		            </div>
+		        </div>
+		        <div class="zino-subject-movie-title-btn-box">
+		            <button class="btn btn-primary" @click="movieNameEditEvent()">취소</button>
+		            <button class="btn btn-primary" @click="setMovieName()">저장</button>
+		        </div>
+		    </div>
+		    <div v-if="flag.videoShowFlag" class="zino-subject-movie-select-form-group">
+		        <div class="zino-subject-movie-select-labal">
+		            <span class="zino-subject-movie-select-lable-text">영상목록</span>
+		        </div>
+		        <div class="zino-subject-movie-select-list-form-group">
+		            <div class="zino-subject-movie-select-search-box">
+		                <input type="text"  placeholder="이름별로 파일 검색">
+		                <button>
+		                    <i class="bi bi-search"></i>
+		                </button>
+		            </div>			      							
+		            <div class="zino-subject-movie-select-table">
+		                <table class="zino-subject-regist-table">
+		                    <thead>
+		                        <tr>
+		                            <th class="zino-subject-movie-select-table-name">파일이름</th>
+		                            <th class="zino-subject-movie-select-table-btn-box"></th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                        <template v-for="video in videos.showList">
+		                            <video_row :key="video.video_idx" :item="video" />
+		                        </template>
+		                        <template>
+		                            <pagination :pm="pm"/>
+		                        </template>
+		                    </tbody>
+		                </table>
+		            </div>
+		        </div>
+		    </div>
 		</div>
-	`,props:['videos', 'pm']
+	`,props:['videos', 'pm','title']
+	,data(){
+		return {
+			flag:{
+				videoShowFlag:false,
+				titleFlag:false
+			},
+			movie_name:this.title,
+			tempTitle:""
+		};
+	}
 	,methods:{
-		init:function(){
-
+		videoFlag:function(){
+			this.flag.videoShowFlag = !this.flag.videoShowFlag;
+		},movieNameEditEvent:function(){
+			this.flag.titleFlag = !this.flag.titleFlag;
+			this.flag.videoShowFlag = false;
+			this.tempTitle = "";
+		},setMovieName(){
+			console.log(this.title);
+			this.title = this.tempTitle;
+			this.movieNameEditEvent();
+		},nameInputEvent(event){
+			this.tempTitle = event.target.value;
 		}
-	},created:function(){
-		this.init();
 	},updated:function(){
-		console.log('updated pageManager',this.pm);
+		console.log('video_item updated');
 	},components:{
 		video_row,
 		pagination
 	}
 }
-
-let pageManager = {
-		state: {
-			page: {
-				totalRecord: 0,
-				blockSize: 10,
-				pageSize: 10,
-				totalPage: 0,
-				firstPage: 0,
-				lastPage: 0,
-				currentPage: 0,
-				no: 0,
-				curPos: 0,
-			}
-		},
-		setPage(length) {
-			console.log("렝스는?", length);
-			this.state.page.totalRecord = length;
-			console.log("현재토탈은?", this.state.page.totalRecord);
-		}
-}
 videoApp= new Vue({
 	el:"#videoApp",
 	data:{
-		videoList:[],//강사가 보유중인 전체 강의들
-		page: pageManager.state.page
+		videoList:videoState.list,//강사가 보유중인 전체 강의들
+		page: videoState.page,
+		videoItemList:[]
 	},
 	components:{
 		video_item
 	},methods:{
 		setList:function(videoList){
-			this.$set(this.videoList,'videos',videoList);
-			console.log("set성공",this.videoList.videos);
-/* 			pageManager.setPage(this.videoList.videos.length); */
+			videoState.setVideoList(videoList);
+			videoState.setTotalRecoard();
+			videoState.setShowList();
 		}
+	},created:function(){
+		let item = [];
+		item['title']='소개';
+		this.videoItemList.push(item);
 	},updated:function(){
-		pageManager.setPage(this.videoList.videos.length);
-		console.log('업데이트  : ',this.videoList);
+		videoState.setTotalRecoard();
+		videoState.setShowList();
+		console.log("videoApp updated")
 	}
 });
 
-function init(){
-	
-	/*for(let i=0;i<100;i++){
-		let json = [];
-		json['title']='임시제목'+i;
-		json['access']=i;
-		videoApp.videoList.push(json);
-	}*/
-	
+function init(){	
 	$.ajax({
 		url:"/teacher/rest/videos/1",
 		type:"get",
 		success:function(result){
-			console.log('값가져옴',result);
 			videoApp.setList(result);
 		}
 	});
