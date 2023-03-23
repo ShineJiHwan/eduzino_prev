@@ -34,9 +34,7 @@
 	       				<span>다음 설명은 강의 미리보기에서 공개되며 강의 성과에 직접적으로 영향을 미칩니다. 이러한 설명은 수강생이 강의가 자신에게 맞는지 여부를 판단할 수 있도록 돕습니다.</span>
 	      			</p>
 	      			<div>
-	      				<template>
-		      				<session_item :videoList="videoList" :page="page"/>
-	      				</template>
+	      				<session_item />
 	      			</div>
            		</div>
            		<div>
@@ -146,7 +144,7 @@ const session_item={
  				</div>
 			</div>
 		</div>
-	`,props:['videoList','page']
+	`,props:[]
 	,data(){
 		return{
 			movieItemList:[]
@@ -154,20 +152,7 @@ const session_item={
 	},components:{
 		movie_item
 	},methods:{
-		videoItemPlus:function(){
-			let item = [];
-			item['movie_name']='';
-			this.movieItemList.push(item);
-		}
-	},created:function(){
-		let item = [];
-		item['movie_name']='소개';
-		this.movieItemList.push(item);
-		console.log("session created : ",this.videoList);
-	},updated:function(){
-		videoState.setTotalRecoard();
-		videoState.setShowList();
-		console.log("subjectApp updated")
+		
 	}
 }
 
@@ -186,9 +171,19 @@ subjectApp= new Vue({
 			videoState.setVideoList(videoList);
 			videoState.setTotalRecoard();
 			videoState.setShowList();
+		},videoItemPlus:function(){
+			let item = [];
+			item['movie_name']='';
+			this.movieItemList.push(item);
 		}
 	},created:function(){
-		console.log("subject created ",this.videoList);
+		let item = [];
+		item['movie_name']='소개';
+		this.movieItemList.push(item);
+	},updated:function(){
+		videoState.setTotalRecoard();
+		videoState.setShowList();
+		console.log("subjectApp updated")
 	}
 });
 

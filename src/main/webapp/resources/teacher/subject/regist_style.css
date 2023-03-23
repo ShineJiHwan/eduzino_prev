@@ -306,6 +306,7 @@ i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
 	font-weight: 540;
 }
 .zino-subject-movie-editor{
+	margin-bottom:20px;
 	background: #fff;
 }
 .zino-subject-movie-title{
@@ -320,10 +321,11 @@ i.bi.bi-file-earmark,i.bi.bi-pencil-fill, i.bi.bi-eraser-fill{
 }
 .zino-subject-movie-left-component{
 	display:flex;
-	width: 80%;
 	align-items: center;
+	flex:1;
 }
-.zino-subject-movie-add-btn-box{
+.zino-subject-movie-edit-btn-box{
+	margin-right:20px;
 	height: 1.3rem;
 }
 .zino-subject-movie-add-btn{
